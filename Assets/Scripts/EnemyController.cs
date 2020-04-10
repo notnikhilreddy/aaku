@@ -11,6 +11,12 @@ public class EnemyController : MonoBehaviour
     private float vel;
     private Rigidbody2D rb;
 
+    public EnemyController() {
+        this.isAttacking = false;
+        this.walkingSpeed = 3f;
+        this.runningSpeed = 5f;
+    }
+
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         vel = walkingSpeed;

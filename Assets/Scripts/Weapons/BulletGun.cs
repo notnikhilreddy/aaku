@@ -95,6 +95,7 @@ public class BulletGun : Weapon {
                 yield return null;
             }
         } else if(weaponOwner.Equals("Enemy")) {
+            Debug.Log(weaponOwner);
             parentObject.GetComponent<EnemyController>().walkingSpeed /= weight;
 
             Vector2 raycastDirection;
@@ -107,7 +108,7 @@ public class BulletGun : Weapon {
                     raycastDirection = Quaternion.Euler(0f, 0f, angle) * parentTransform.right * parentTransform.localScale.x;
                     raycastDirection = raycastDirection.normalized;
                     
-                    hitInfo = Physics2D.Raycast(transform.position, raycastDirection, visualRange, ~1 << LayerMask.NameToLayer("Enemies"));
+                    hitInfo = Physics2D.Raycast(transform.position, raycastDirection, visualRange, ~1 << LayerMask.NameToLayer("Enemy"));
                     
                     if(hitInfo && hitInfo.collider.tag.Equals("Player")) {
                         playerSpotted = true;

@@ -9,6 +9,10 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     private float currentHealth;
     // Start is called before the first frame update
+
+    public PlayerHealth() {
+        this.fullHealth = 50f;
+    }
     void Start()
     {
         currentHealth = fullHealth;

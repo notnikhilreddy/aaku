@@ -12,6 +12,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 playerScale;
     private float direction;
     // Start is called before the first frame update
+
+    public PlayerController() {
+        this.playerSpeed = 10f;
+        this.jumpForce = 15f;
+        // this.wallsLayer = LayerMask.NameToLayer("Platform");
+    }
     void Start() {
         rb = GetComponent<Rigidbody2D>();
         // isGrounded = true;
@@ -21,7 +27,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate() {
         isGrounded = rb.IsTouchingLayers(wallsLayer);
-        if((direction = Input.GetAxis("horizontal")) != 0) {
+        if((direction = Input.GetAxis("Horizontal")) != 0) {
 
             if(!Input.mousePresent) // CHANGE LATER
                 if(direction > 0)
@@ -29,9 +35,9 @@ public class PlayerController : MonoBehaviour
                 else
                     transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
-            rb.velocity = new Vector2(playerSpeed * Input.GetAxis("horizontal"), rb.velocity.y);
+            rb.velocity = new Vector2(playerSpeed * Input.GetAxis("Horizontal"), rb.velocity.y);
         }
-        if(Input.GetAxis("vertical") > 0 && isGrounded) {
+        if(Input.GetAxis("Vertical") > 0 && isGrounded) {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
         }
     }

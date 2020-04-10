@@ -9,6 +9,10 @@ public class EnemyHealth : MonoBehaviour
     public float enemyMaxHealth;
     public Slider enemySlider;
     private float currentHealth;
+
+    public EnemyHealth() {
+        this.enemyMaxHealth = 10f;
+    }
     void Start()
     {
         currentHealth = enemyMaxHealth;

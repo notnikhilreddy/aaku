@@ -7,7 +7,11 @@ public class CameraController : MonoBehaviour
     public Transform target; //what camera is following
     public float smoothing;// dampening effect
     Vector3 offset;
-    float lowY;
+    private float lowY;
+
+    public CameraController() {
+        this.smoothing = 5f;
+    }
     // Start is called before the first frame update
     void Start()
     {
