@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Background
+  - Powerups
+  - Bullet
+  - Enemy
+  - Weapon
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -13,14 +19,14 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Background
+  - Powerups
+  - Enemy
+  - EnemyWeapon
+  - Player
+  - PlayerWeapon
+  - Bullet
+  - Platform
   - 
   - 
   - 
@@ -40,4 +46,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3789069359
+    locked: 0
+  - name: Powerups
+    uniqueID: 619587571
+    locked: 0
+  - name: Enemy
+    uniqueID: 3671946645
+    locked: 0
+  - name: EnemyWeapon
+    uniqueID: 1315979655
+    locked: 0
+  - name: Player
+    uniqueID: 3615031359
+    locked: 0
+  - name: PlayerWeapon
+    uniqueID: 3359051227
+    locked: 0
+  - name: Bullet
+    uniqueID: 3453979417
+    locked: 0
+  - name: Platform
+    uniqueID: 749384951
     locked: 0
