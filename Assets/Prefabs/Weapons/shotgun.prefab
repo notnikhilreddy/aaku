@@ -96,13 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  damagePerAttack: 10
+  damagePerAttack: 5
   visualRange: 10
   visualAngle: 90
   bulletSpeed: 40
   attackDelay: 0.5
-  bulletsPerAttack: 5
-  simultaneously: 1
+  bulletsPerAttack: 1
+  simultaneously: 0
   timeBetweenBullets: 0.03
   spreadAngle: 5
   bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,

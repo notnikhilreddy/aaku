@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
-  damagePerAttack: 10
+  damagePerAttack: 5
   visualRange: 10
   visualAngle: 90
   attackDelay: 0.5

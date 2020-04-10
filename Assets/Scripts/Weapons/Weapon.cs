@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour
 
     public Weapon() {
         this.weight = 1f;
-        this.damagePerAttack = 10f;
+        this.damagePerAttack = 5f;
         this.visualRange = 10f;
         this.visualAngle = 90f;
     }
