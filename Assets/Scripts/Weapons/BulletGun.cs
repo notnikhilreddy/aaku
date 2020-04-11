@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class BulletGun : Weapon {
     public float bulletSpeed;
@@ -9,6 +10,7 @@ public class BulletGun : Weapon {
     public float timeBetweenBullets, spreadAngle;
     public GameObject bulletObject;
     public LineRenderer aimingLaser;
+    public Joystick aimingJoystick;
 
     private GameObject parentObject;
     private string weaponOwner;
@@ -35,13 +37,19 @@ public class BulletGun : Weapon {
         StartCoroutine(coroutine);
     }
 
+    private void Update() {
+        
+    }
+
     // Update is called once per frame
     private IEnumerator Gun() {
         if(weaponOwner.Equals("Player")) {
             float lastFireTime = 0f;
             while(true) {
-                if(Input.mousePresent) { //CHANGE LATER
-                    pointDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - parentObject.transform.position;
+                // if(!(CrossPlatformInputManager.GetAxis("HorizontalAim") == 0f && CrossPlatformInputManager.GetAxis("VerticalAim") == 0f)) {
+                // if(Input.mousePresent) { //CHANGE LATER
+                    // pointDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - parentObject.transform.position;
+                    pointDirection = new Vector2(CrossPlatformInputManager.GetAxis("HorizontalAim"), CrossPlatformInputManager.GetAxis("VerticalAim"));
                     pointDirection = pointDirection.normalized;
 
                     RaycastHit2D hitInfo = Physics2D.Raycast(firePoint, pointDirection, visualRange);
@@ -58,10 +66,11 @@ public class BulletGun : Weapon {
                         parentTransform.localScale = new Vector2(-Mathf.Abs(parentTransform.localScale.x), parentTransform.localScale.y);
                     }
 
-                    if(Input.GetMouseButtonDown(0)) {
+                    // if(Input.GetMouseButtonDown(0)) {
+                    if(CrossPlatformInputManager.GetAxis("Shoot") > 0f) {
                         firePoint = transform.GetChild(0).position;
 
-                        pointDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - parentObject.transform.position;
+                        pointDirection = new Vector2(CrossPlatformInputManager.GetAxis("HorizontalAim"), CrossPlatformInputManager.GetAxis("VerticalAim"));
                         pointDirection = pointDirection.normalized;
                         
                         if(Time.time - lastFireTime >= attackDelay) {
@@ -69,7 +78,7 @@ public class BulletGun : Weapon {
                             GameObject newBullet = Instantiate(bulletObject, firePoint, transform.rotation);
                             newBullet.GetComponent<BulletController>().shotBy = parentObject.tag;
                             newBullet.GetComponent<BulletController>().damage = damagePerAttack / bulletsPerAttack;
-                            newBullet.GetComponent<Rigidbody2D>().velocity = pointDirection * bulletSpeed;
+                            newBullet.GetComponent<Rigidbody2D>().velocity = parentTransform.right * bulletSpeed;
 
                             float lastBulletTime = Time.time;
                             for(int i = 0; i < bulletsPerAttack-1; i++) {
@@ -90,12 +99,12 @@ public class BulletGun : Weapon {
                             lastFireTime = Time.time;
                         }
                     }
-                }
+                // }
 
                 yield return null;
             }
         } else if(weaponOwner.Equals("Enemy")) {
-            Debug.Log(weaponOwner);
+            // Debug.Log(weaponOwner);
             parentObject.GetComponent<EnemyController>().walkingSpeed /= weight;
 
             Vector2 raycastDirection;

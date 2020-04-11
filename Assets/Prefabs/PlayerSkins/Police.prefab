@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04fa11f2ca30cb5fe990bd8dca3bcd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 7
+  playerSpeed: 10
   jumpForce: 15
   wallsLayer:
     serializedVersion: 2

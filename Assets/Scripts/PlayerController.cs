@@ -26,18 +26,23 @@ public class PlayerController : MonoBehaviour
         playerScale = transform.localScale;
     }
 
+    private void Update() {
+        // Debug.Log(CrossPlatformInputManager.GetAxis("HorizontalAim"));
+    }
+
     // Update is called once per frame
     void FixedUpdate() {
         isGrounded = rb.IsTouchingLayers(wallsLayer);
         // if((direction = Input.GetAxis("Horizontal")) != 0) {
-        Debug.Log(CrossPlatformInputManager.GetAxis("Horizontal"));
+        // Debug.Log(CrossPlatformInputManager.GetAxis("Horizontal"));
         if((direction = CrossPlatformInputManager.GetAxis("Horizontal")) != 0) {
 
-            if(!Input.mousePresent) // CHANGE LATER
-                if(direction > 0)
-                    transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                else
-                    transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+            // if(!Input.mousePresent) // CHANGE LATER
+            // if(CrossPlatformInputManager.GetAxis("HorizontalAim") == 0f && CrossPlatformInputManager.GetAxis("VerticalAim") == 0)
+            //     if(direction > 0)
+            //         transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+            //     else
+            //         transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
 
             // rb.velocity = new Vector2(playerSpeed * Input.GetAxis("Horizontal"), rb.velocity.y);
             rb.velocity = new Vector2(playerSpeed * CrossPlatformInputManager.GetAxis("Horizontal"), rb.velocity.y);
