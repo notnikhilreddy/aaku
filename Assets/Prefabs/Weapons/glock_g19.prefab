@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5659635570571198686}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,3 +237,4 @@ MonoBehaviour:
   bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
     type: 3}
   aimingLaser: {fileID: 0}
+  aimingJoystick: {fileID: 0}

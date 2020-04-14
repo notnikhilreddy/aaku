@@ -1,56 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
+    public float playerSpeed = 10f;
+    public float jumpForce = 15f;
 
+    private int platformLayer;
     private Rigidbody2D rb;
-    private bool isGrounded;
-    public float playerSpeed, jumpForce;
-    public LayerMask wallsLayer;
+    private bool isGrounded = false;
     private Vector2 playerScale;
-    private float direction;
+    private float velocity;
     private bool leftPressed, rightPressed, upPressed;
-    // Start is called before the first frame update
+    
 
-    public PlayerController() {
-        this.playerSpeed = 10f;
-        this.jumpForce = 15f;
-        // this.wallsLayer = LayerMask.NameToLayer("Platform");
-    }
+    // Start is called before the first frame update
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        // isGrounded = true;
+        platformLayer = LayerMask.NameToLayer("Platform");
         playerScale = transform.localScale;
     }
 
-    private void Update() {
-        // Debug.Log(CrossPlatformInputManager.GetAxis("HorizontalAim"));
-    }
 
     // Update is called once per frame
+    private void Update() {
+        if(CrossPlatformInputManager.GetAxis("Horizontal") > 0f || Input.GetAxis("Horizontal") > 0f)
+            transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+        else if(CrossPlatformInputManager.GetAxis("Horizontal") < 0f || Input.GetAxis("Horizontal") < 0f)
+            transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+    }
+
+
     void FixedUpdate() {
-        isGrounded = rb.IsTouchingLayers(wallsLayer);
-        // if((direction = Input.GetAxis("Horizontal")) != 0) {
-        // Debug.Log(CrossPlatformInputManager.GetAxis("Horizontal"));
-        if((direction = CrossPlatformInputManager.GetAxis("Horizontal")) != 0) {
-
-            // if(!Input.mousePresent) // CHANGE LATER
-            // if(CrossPlatformInputManager.GetAxis("HorizontalAim") == 0f && CrossPlatformInputManager.GetAxis("VerticalAim") == 0)
-            //     if(direction > 0)
-            //         transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-            //     else
-            //         transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-
-            // rb.velocity = new Vector2(playerSpeed * Input.GetAxis("Horizontal"), rb.velocity.y);
-            rb.velocity = new Vector2(playerSpeed * CrossPlatformInputManager.GetAxis("Horizontal"), rb.velocity.y);
+        if((velocity = CrossPlatformInputManager.GetAxis("Horizontal")) != 0f || (velocity = Input.GetAxis("Horizontal")) != 0f) {
+            rb.velocity = new Vector2(playerSpeed * velocity, rb.velocity.y);
         } else {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
-        if(CrossPlatformInputManager.GetAxis("Vertical") > 0 && isGrounded) {
+
+        if(isGrounded && (CrossPlatformInputManager.GetAxis("Vertical") > 0f || Input.GetAxis("Vertical") > 0f)) {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if(other.gameObject.layer == platformLayer) {
+            isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+        if(other.gameObject.layer == platformLayer) {
+            isGrounded = false;
         }
     }
 }
