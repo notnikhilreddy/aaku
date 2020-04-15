@@ -25,8 +25,10 @@ public class Manager : MonoBehaviour {
             GameObject player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
             player.GetComponent<PlayerHealth>().healthSlider = healthSlider;
             player.GetComponent<SpriteRenderer>().sprite = playerSkins[skinID];
+            PhysicsMaterial2D material = player.GetComponent<PolygonCollider2D>().sharedMaterial;
             Destroy(player.GetComponent<PolygonCollider2D>());
-            player.AddComponent<PolygonCollider2D>();
+            PolygonCollider2D collider = player.AddComponent<PolygonCollider2D>();
+            collider.sharedMaterial = material;
         }
 
         playerHealthCanvas.gameObject.SetActive(false);
