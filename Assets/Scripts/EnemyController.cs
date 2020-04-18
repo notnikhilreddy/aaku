@@ -7,20 +7,19 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
 
     public bool isAttacking;
-    public float leftPoint, rightPoint, walkingSpeed, runningSpeed;
+    public float leftPoint, rightPoint, characterSpeed;
     private float vel;
     private Rigidbody2D rb;
 
     public EnemyController() {
         this.isAttacking = false;
-        this.walkingSpeed = 3f;
-        this.runningSpeed = 5f;
+        this.characterSpeed = 3f;
     }
 
     void Start() {
         rb = GetComponent<Rigidbody2D>();
-        vel = walkingSpeed;
-        if(walkingSpeed == 0) {
+        vel = characterSpeed;
+        if(characterSpeed == 0) {
             leftPoint = transform.position.x - 0.01f;
             rightPoint = transform.position.x + 0.01f;
         }
@@ -31,11 +30,11 @@ public class EnemyController : MonoBehaviour
             float pos = transform.position.x;
 
             if(pos <= leftPoint) {
-                vel = walkingSpeed;
+                vel = characterSpeed;
                 transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
             }
             if(pos >= rightPoint) {
-                vel = -walkingSpeed;
+                vel = -characterSpeed;
                 transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
             }
             rb.velocity = new Vector2(vel, rb.velocity.y);

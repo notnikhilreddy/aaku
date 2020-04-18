@@ -105,7 +105,7 @@ public class BulletGun : Weapon {
             }
         } else if(weaponOwner.Equals("Enemy")) {
             // Debug.Log(weaponOwner);
-            parentObject.GetComponent<EnemyController>().walkingSpeed /= weight;
+            parentObject.GetComponent<EnemyController>().characterSpeed /= weight;
 
             Vector2 raycastDirection;
             RaycastHit2D hitInfo;

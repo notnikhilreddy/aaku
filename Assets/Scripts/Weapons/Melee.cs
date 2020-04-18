@@ -90,9 +90,9 @@ public class Melee : Weapon {
                     parentObject.GetComponent<EnemyController>().isAttacking = true;
 
                     if(pointDirection.x >= 0) {
-                        runVelocity = new Vector2(parentObject.GetComponent<EnemyController>().runningSpeed, parentObject.GetComponent<Rigidbody2D>().velocity.y);
+                        runVelocity = new Vector2(parentObject.GetComponent<EnemyController>().characterSpeed, parentObject.GetComponent<Rigidbody2D>().velocity.y);
                     } else {
-                        runVelocity = new Vector2(-parentObject.GetComponent<EnemyController>().runningSpeed, parentObject.GetComponent<Rigidbody2D>().velocity.y);
+                        runVelocity = new Vector2(-parentObject.GetComponent<EnemyController>().characterSpeed, parentObject.GetComponent<Rigidbody2D>().velocity.y);
                     }
                     
                     parentObject.GetComponent<Rigidbody2D>().velocity = runVelocity;

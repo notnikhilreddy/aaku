@@ -16,19 +16,31 @@ public class Manager : MonoBehaviour {
     public bool addPlayerControlCanvas = true;
     public Canvas playerControlCanvas;
 
+    public bool addWeapon = true;
+    public GameObject[] Weapons;
+
     private int skinID = 2;
+    private int weaponID = 0;
+    private GameObject player;
 
 
     // Start is called before the first frame update
     void Start() {
         if(spawnPlayer) {
-            GameObject player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
+            player = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
             player.GetComponent<PlayerHealth>().healthSlider = healthSlider;
             player.GetComponent<SpriteRenderer>().sprite = playerSkins[skinID];
             PhysicsMaterial2D material = player.GetComponent<PolygonCollider2D>().sharedMaterial;
             Destroy(player.GetComponent<PolygonCollider2D>());
             PolygonCollider2D collider = player.AddComponent<PolygonCollider2D>();
             collider.sharedMaterial = material;
+        }
+
+        if(addWeapon) {
+            Transform playerHand = player.transform.Find("Hand");
+            GameObject weapon = Instantiate(Weapons[weaponID], playerHand.position, Quaternion.identity, playerHand);
+            weapon.layer = LayerMask.NameToLayer("PlayerWeapon");
+            weapon.GetComponent<SpriteRenderer>().sortingLayerName = "PlayerWeapon";
         }
 
         playerHealthCanvas.gameObject.SetActive(false);

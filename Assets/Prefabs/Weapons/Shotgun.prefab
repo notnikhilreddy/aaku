@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3193834689034205949}
   - component: {fileID: 6577751794248299318}
   - component: {fileID: 3895272830280134126}
+  - component: {fileID: -2620304856330705436}
   m_Layer: 11
-  m_Name: shotgun
+  m_Name: Shotgun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4163498574024280725}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4a8a3b6c86c41f69b95ee14b38caa0a, type: 3}
   m_Name: 
@@ -108,6 +109,28 @@ MonoBehaviour:
   bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
     type: 3}
   aimingLaser: {fileID: 0}
+  aimingJoystick: {fileID: 0}
+--- !u!114 &-2620304856330705436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4163498574024280725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9d71d3fe4cf6b6e796e87fe01a5751d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 0
+  weaponWeight: 1
+  bulletSpeed: 20
+  bullet: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d, type: 3}
+  damagePerAttack: 5
+  attackDelay: 1
+  bulletsPerAttack: 10
+  bulletDelay: 0.01
+  spreadAngle: 10
 --- !u!1 &6176054783638932121
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6176054783638932121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 0.2, z: 0}
+  m_LocalPosition: {x: 1.255, y: 0.154, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3193834689034205949}
