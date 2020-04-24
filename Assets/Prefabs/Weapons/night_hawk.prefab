@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3490461881840492777}
   - component: {fileID: 8865991111092490673}
-  - component: {fileID: 3661683531723924702}
+  - component: {fileID: 7812157363210701452}
   m_Layer: 11
   m_Name: night_hawk
-  m_TagString: Weapon
+  m_TagString: BulletGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3661683531723924702
+--- !u!114 &7812157363210701452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,9 +105,9 @@ MonoBehaviour:
   simultaneously: 0
   timeBetweenBullets: 0.03
   spreadAngle: 5
-  bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
-    type: 3}
+  bulletObject: {fileID: 0}
   aimingLaser: {fileID: 0}
+  aimingJoystick: {fileID: 0}
 --- !u!1 &2734031857410116523
 GameObject:
   m_ObjectHideFlags: 0

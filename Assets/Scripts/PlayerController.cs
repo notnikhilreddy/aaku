@@ -4,6 +4,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController : MonoBehaviour {
     public float characterSpeed = 10f;
     public float jumpForce = 15f;
+    public bool meleeAttacking = false;
 
     private int platformLayer;
     private Rigidbody2D rb;
@@ -22,7 +23,10 @@ public class PlayerController : MonoBehaviour {
         playerScale = transform.localScale;
 
         weapon = transform.Find("Hand").GetChild(0).gameObject;
-        characterSpeed /= weapon.GetComponent<WeaponController>().weaponWeight;
+        if(weapon.tag.Equals("BulletGun"))
+            characterSpeed /= weapon.GetComponent<BulletGun>().weaponWeight;
+        else if(weapon.tag.Equals("Melee"))
+            characterSpeed /= weapon.GetComponent<Melee>().weaponWeight;
     }
 
 
@@ -34,7 +38,10 @@ public class PlayerController : MonoBehaviour {
             transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
     
         if(CrossPlatformInputManager.GetAxis("Attack") > 0 || Input.GetKey(KeyCode.Space)) {
-            StartCoroutine(weapon.GetComponent<WeaponController>().attack());
+            if(weapon.tag.Equals("BulletGun"))
+                StartCoroutine(weapon.GetComponent<BulletGun>().attack());
+            else if(weapon.tag.Equals("Melee"))
+                weapon.GetComponent<Melee>().attack();
         }
     }
 

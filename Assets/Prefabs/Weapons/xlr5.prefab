@@ -40,10 +40,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3274997798214461043}
   - component: {fileID: 627419909179720422}
-  - component: {fileID: 9179524336679397598}
+  - component: {fileID: 1885964005362827588}
   m_Layer: 11
   m_Name: xlr5
-  m_TagString: Weapon
+  m_TagString: BulletGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9179524336679397598
+--- !u!114 &1885964005362827588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,6 +135,6 @@ MonoBehaviour:
   simultaneously: 0
   timeBetweenBullets: 0.03
   spreadAngle: 5
-  bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
-    type: 3}
+  bulletObject: {fileID: 0}
   aimingLaser: {fileID: 0}
+  aimingJoystick: {fileID: 0}

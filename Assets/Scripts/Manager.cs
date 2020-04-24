@@ -20,7 +20,7 @@ public class Manager : MonoBehaviour {
     public GameObject[] Weapons;
 
     private int skinID = 2;
-    private int weaponID = 0;
+    private int weaponID = 8;
     private GameObject player;
 
 

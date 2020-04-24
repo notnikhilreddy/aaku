@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6084793081344215145}
   - component: {fileID: 6804030679794499585}
-  - component: {fileID: 5085573192748177636}
+  - component: {fileID: -5895144563107418697}
   m_Layer: 11
   m_Name: pistol
-  m_TagString: Weapon
+  m_TagString: BulletGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5085573192748177636
+--- !u!114 &-5895144563107418697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -105,9 +105,9 @@ MonoBehaviour:
   simultaneously: 0
   timeBetweenBullets: 0.03
   spreadAngle: 5
-  bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
-    type: 3}
+  bulletObject: {fileID: 0}
   aimingLaser: {fileID: 0}
+  aimingJoystick: {fileID: 0}
 --- !u!1 &7600762303494062829
 GameObject:
   m_ObjectHideFlags: 0
