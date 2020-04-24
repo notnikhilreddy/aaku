@@ -14,6 +14,8 @@ public class BulletGun : MonoBehaviour {
     public float spreadAngle = 10f;
     public float horizontalSpread = 0f;
     public float bulletRange = 100f;
+
+    public Animator animator;
     
     private Transform attackPoint;
     private float lastFireTime = 0f;
@@ -24,6 +26,7 @@ public class BulletGun : MonoBehaviour {
         attackPoint = transform.Find("AttackPoint");
 
         owner = transform.parent.parent.gameObject;
+        animator = GetComponent<Animator>();
     }
 
     private void Update() {
@@ -36,12 +39,15 @@ public class BulletGun : MonoBehaviour {
         if(!attacking && Time.time - lastFireTime >= attackDelay) {
             attacking = true;
             float lastBulletTime;
+            animator.SetTrigger("Recoil");
                         
             GameObject newBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
             newBullet.GetComponent<BulletController>().shotBy = owner.tag;
             newBullet.GetComponent<BulletController>().damage = damagePerBullet;
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
             newBullet.GetComponent<BulletController>().life = bulletRange / bulletSpeed;
+
+            // animator.SetBool("Attacking", false);
 
             lastBulletTime = Time.time;
             for(int i = 0; i < bulletsPerAttack-1; i++) {
@@ -52,11 +58,15 @@ public class BulletGun : MonoBehaviour {
                 float offsetAngle = Random.Range(-spreadAngle/2f, spreadAngle/2f);
                 float offsetV = Random.Range(-horizontalSpread/2f, horizontalSpread/2f);
 
+                animator.SetTrigger("Recoil");
+
                 newBullet = Instantiate(bullet, attackPoint.position, transform.rotation);
                 newBullet.GetComponent<BulletController>().shotBy = owner.tag;
                 newBullet.GetComponent<BulletController>().damage = damagePerBullet;
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Quaternion.Euler(0, 0, offsetAngle) * Vector2.right * (bulletSpeed+offsetV));
                 newBullet.GetComponent<BulletController>().life = bulletRange / (bulletSpeed+offsetV);
+
+                // animator.SetBool("Attacking", false);
 
                 lastBulletTime = Time.time;
             }
