@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 9133159062749740693}
   - component: {fileID: 232535238018883529}
   - component: {fileID: 6949481409469504000}
+  - component: {fileID: -6289233024562141330}
   m_Layer: 11
   m_Name: glock_g19
   m_TagString: BulletGun
@@ -224,16 +225,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a8a3b6c86c41f69b95ee14b38caa0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  damagePerAttack: 5
-  visualRange: 10
-  visualAngle: 90
+  weaponWeight: 1
   bulletSpeed: 40
+  bullet: {fileID: 0}
   attackDelay: 0.5
   bulletsPerAttack: 1
-  simultaneously: 0
-  timeBetweenBullets: 0.03
+  bulletDelay: 0
+  damagePerBullet: 1
   spreadAngle: 5
-  bulletObject: {fileID: 0}
-  aimingLaser: {fileID: 0}
-  aimingJoystick: {fileID: 0}
+  horizontalSpread: 0
+  bulletRange: 100
+  animator: {fileID: 0}
+--- !u!95 &-6289233024562141330
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8559971901464333355}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 91670903a8c57223d8177a1388a3d640, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

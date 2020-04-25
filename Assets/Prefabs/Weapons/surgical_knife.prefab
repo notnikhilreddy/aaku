@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3969832681978998107}
   - component: {fileID: 3862294531208857518}
   - component: {fileID: 6045982951963758370}
-  - component: {fileID: 625950349981057091}
+  - component: {fileID: 4343217909340567088}
   m_Layer: 11
   m_Name: surgical_knife
   m_TagString: Melee
@@ -132,7 +132,7 @@ MonoBehaviour:
   weaponWeight: 1
   damagePerAttack: 5
   attacking: 0
---- !u!95 &625950349981057091
+--- !u!95 &4343217909340567088
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

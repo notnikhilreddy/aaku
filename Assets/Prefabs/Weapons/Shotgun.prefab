@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3193834689034205949}
   - component: {fileID: 6577751794248299318}
   - component: {fileID: 7314994154726801549}
-  - component: {fileID: -7515720818586284703}
+  - component: {fileID: -7943063634063694653}
   m_Layer: 11
   m_Name: Shotgun
   m_TagString: BulletGun
@@ -107,7 +107,7 @@ MonoBehaviour:
   horizontalSpread: 5
   bulletRange: 5
   animator: {fileID: 0}
---- !u!95 &-7515720818586284703
+--- !u!95 &-7943063634063694653
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

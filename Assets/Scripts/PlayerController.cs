@@ -4,7 +4,6 @@ using UnityStandardAssets.CrossPlatformInput;
 public class PlayerController : MonoBehaviour {
     public float characterSpeed = 10f;
     public float jumpForce = 15f;
-    public bool meleeAttacking = false;
 
     private int platformLayer;
     private Rigidbody2D rb;

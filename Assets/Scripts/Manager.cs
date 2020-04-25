@@ -19,8 +19,8 @@ public class Manager : MonoBehaviour {
     public bool addWeapon = true;
     public GameObject[] Weapons;
 
-    private int skinID = 2;
-    private int weaponID = 0;
+    public int skinID = 2;
+    public int weaponID = 0;
     private GameObject player;
 
 

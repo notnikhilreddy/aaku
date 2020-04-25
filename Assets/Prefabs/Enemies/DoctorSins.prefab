@@ -33,6 +33,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7507740937349744306}
+  - {fileID: 7422216358505847895}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -100,9 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAttacking: 0
   leftPoint: 0
-  rightPoint: 0
-  walkingSpeed: 3
-  runningSpeed: 5
+  rightPoint: 5
+  characterSpeed: 3
 --- !u!114 &2508053741105509145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.60962135, y: 0.32044786}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1.52, y: 2.32}
     newSize: {x: 1.52, y: 2.32}
     adaptiveTilingThreshold: 0.5
@@ -163,14 +163,44 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.9266244, y: 1.576561}
-      - {x: -0.9266244, y: 0.36656097}
-      - {x: -0.83662444, y: -0.53343904}
-      - {x: -0.8166244, y: -0.553439}
-      - {x: -0.7266244, y: -0.743439}
-      - {x: 0.31337553, y: -0.743439}
-      - {x: 0.59337556, y: 0.40656096}
-      - {x: 0.59337556, y: 1.576561}
+    - - {x: -0.76, y: 2.32}
+      - {x: -0.76, y: 1.11}
+      - {x: -0.66999996, y: 0.21}
+      - {x: -0.65, y: 0.19}
+      - {x: -0.56, y: 0}
+      - {x: 0.48, y: 0}
+      - {x: 0.76, y: 1.15}
+      - {x: 0.76, y: 2.32}
+--- !u!1 &6345726039589218491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7422216358505847895}
+  m_Layer: 10
+  m_Name: Eye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7422216358505847895
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6345726039589218491}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7973986246078409626}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2812803881962111161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 5708818992841541131, guid: 9d027e55bb23193819277cbc9ef4cd25,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5708818992841541131, guid: 9d027e55bb23193819277cbc9ef4cd25,
         type: 3}
