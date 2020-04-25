@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2163467377338883039}
   - component: {fileID: 3131494032849028046}
-  - component: {fileID: 7773630300539336146}
+  - component: {fileID: 1735552983065940487}
+  - component: {fileID: -5135176556874151813}
   m_Layer: 11
   m_Name: machine_gun
-  m_TagString: Weapon
+  m_TagString: BulletGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7773630300539336146
+--- !u!114 &1735552983065940487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,19 +96,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a8a3b6c86c41f69b95ee14b38caa0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weight: 1
-  damagePerAttack: 5
-  visualRange: 10
-  visualAngle: 90
+  weaponWeight: 1
   bulletSpeed: 40
+  bullet: {fileID: 0}
   attackDelay: 0.5
   bulletsPerAttack: 1
-  simultaneously: 0
-  timeBetweenBullets: 0.03
+  bulletDelay: 0
+  damagePerBullet: 1
   spreadAngle: 5
-  bulletObject: {fileID: 2398426544988332153, guid: 46e83bd81207ee88f9fb15257fe96b8d,
-    type: 3}
-  aimingLaser: {fileID: 0}
+  horizontalSpread: 0
+  bulletRange: 100
+  animator: {fileID: 0}
+--- !u!95 &-5135176556874151813
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255940136112695714}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 91670903a8c57223d8177a1388a3d640, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7476451091566373154
 GameObject:
   m_ObjectHideFlags: 0

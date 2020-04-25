@@ -10,6 +10,9 @@ TagManager:
   - Enemy
   - Weapon
   - Platform
+  - BulletGun
+  - Melee
+  - PlasmaGun
   layers:
   - Default
   - TransparentFX

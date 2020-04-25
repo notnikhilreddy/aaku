@@ -6,17 +6,19 @@ public class BulletController : MonoBehaviour
 {
     public string shotBy;
     public float damage;
+    public float life;
     private Rigidbody2D rb;
+    private float startTime;
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         rb = GetComponent<Rigidbody2D>();
+        startTime = Time.time;
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
+    void Update() {
+        if(Time.time - startTime >= life)
+            Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
