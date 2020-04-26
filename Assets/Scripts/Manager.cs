@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Manager : MonoBehaviour {
+    public GameObject mainCamera;
     public bool spawnPlayer = true;
     public Transform spawnPoint;
     public GameObject playerPrefab;
@@ -34,6 +35,7 @@ public class Manager : MonoBehaviour {
             Destroy(player.GetComponent<PolygonCollider2D>());
             PolygonCollider2D collider = player.AddComponent<PolygonCollider2D>();
             collider.sharedMaterial = material;
+            mainCamera.GetComponent<CameraController>().target = player.transform;
         }
 
         if(addWeapon) {

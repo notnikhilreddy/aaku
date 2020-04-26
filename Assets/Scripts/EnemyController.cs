@@ -12,7 +12,7 @@ public class EnemyController : MonoBehaviour {
     private Rigidbody2D rb;
     private Transform eye;
     private GameObject weapon;
-    private float weaponRange;
+    private float weaponRange, attackPointDist;
     // private Animator animator;
 
 
@@ -25,17 +25,23 @@ public class EnemyController : MonoBehaviour {
 
         eye = transform.Find("Eye");
         // StartCoroutine(shootRays());
+        vel = characterSpeed;
 
         weapon = transform.Find("Hand").GetChild(0).gameObject;
+        // animator = GetComponent<Animator>();
+        attackPointDist = Mathf.Abs(eye.position.x - weapon.transform.Find("AttackPoint").position.x);
+        
         if(weapon.CompareTag("BulletGun")) {
-            weaponRange = weapon.GetComponent<BulletGun>().bulletRange;
+            weaponRange = weapon.GetComponent<BulletGun>().weaponRange;
             characterSpeed /= weapon.GetComponent<BulletGun>().weaponWeight;
         } else if(weapon.CompareTag("Melee")) {
-            weaponRange = 1f;
+            weaponRange = weapon.GetComponent<Melee>().weaponRange;
+            // Debug.Log(weaponRange);
             characterSpeed /= weapon.GetComponent<Melee>().weaponWeight;
         }
-        vel = characterSpeed;
-        // animator = GetComponent<Animator>();
+        // Debug.Log(attackPointDist);
+        // Debug.Log(weaponRange);
+
 
         StartCoroutine(chill());
         StartCoroutine(alert());
@@ -54,22 +60,21 @@ public class EnemyController : MonoBehaviour {
 
                 if(pos <= leftPoint && transform.localScale.x < 0) {
                     vel = 0;
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
 
                     if(!isAttacking && !onAlert) {
                         transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                        vel = characterSpeed;
                     }
                 }
                 if(pos >= rightPoint && transform.localScale.x > 0) {
                     vel = 0;
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
                     
                     if(!isAttacking && !onAlert) {
                         transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-                        vel = characterSpeed;
                     }
                 }
+                vel = characterSpeed;
             }
 
             yield return null;
@@ -77,38 +82,45 @@ public class EnemyController : MonoBehaviour {
     }
 
 
-    public bool animationOver;
     private IEnumerator alert() {
         RaycastHit2D backRay;
         while(true) {
-            backRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.left), 3, ~1 << LayerMask.NameToLayer("Enemy"));
-            
-            if(backRay && backRay.collider.CompareTag("Player")) {
-                onAlert = true;
-                vel = 0;
-                // animator.SetTrigger("Alert");
+            if(!isAttacking) {
+                backRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.left), 3, ~1 << LayerMask.NameToLayer("Enemy"));
                 
-                // while(!animationOver) yield return null;
-                transform.Find("AlertSign").gameObject.SetActive(true);
-                yield return new WaitForSeconds(1f);
+                if(backRay && backRay.collider.CompareTag("Player")) {
+                    onAlert = true;
+                    vel = 0;
+                    // animator.SetTrigger("Alert");
+                    
+                    // while(!animationOver) yield return null;
+                    transform.Find("AlertSign").gameObject.SetActive(true);
+                    yield return new WaitForSeconds(0.5f);
 
-                if(!isAttacking)
-                    transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);                yield return new WaitForSeconds(0.5f);
-                yield return new WaitForSeconds(0.5f * Time.deltaTime);
-                if(!isAttacking)
-                    transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);                yield return new WaitForSeconds(0.5f);
-                yield return new WaitForSeconds(0.5f * Time.deltaTime);
-                if(!isAttacking)
-                    transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);                yield return new WaitForSeconds(0.5f);
-                yield return new WaitForSeconds(0.5f * Time.deltaTime);
-                if(!isAttacking)
-                    transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);                yield return new WaitForSeconds(0.5f);
-                yield return new WaitForSeconds(0.5f * Time.deltaTime);
+                    vel = characterSpeed / 2f;
+                    if(!isAttacking) {
+                        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                        yield return new WaitForSeconds(0.5f);
+                    }
+                    if(!isAttacking) {
+                        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                        yield return new WaitForSeconds(0.5f);
+                    }
+                    if(!isAttacking) {
+                        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                        yield return new WaitForSeconds(0.5f);
+                    }
+                    if(!isAttacking) {
+                        transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
+                        yield return new WaitForSeconds(0.5f);
+                    }
+                    vel = 0;
+                    yield return new WaitForSeconds(0.5f);
 
-                transform.Find("AlertSign").gameObject.SetActive(false);
-                
-                vel = characterSpeed;
-                onAlert = false;
+                    transform.Find("AlertSign").gameObject.SetActive(false);
+                    
+                    onAlert = false;
+                }
             }
 
             yield return null;
@@ -119,95 +131,49 @@ public class EnemyController : MonoBehaviour {
     private IEnumerator attack() {
         float lastAttackingTime = 0f;
         RaycastHit2D frontRay;
+        Transform player = null;
+
         while(true) {
             frontRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.right), visualRange, ~1 << LayerMask.NameToLayer("Enemy"));
             
             if(frontRay && frontRay.collider.CompareTag("Player")) {
                 isAttacking = true;
+                transform.Find("AttackSign").gameObject.SetActive(true);
+                player = frontRay.transform;
                 
-                if(frontRay.distance <= weaponRange) {
-                    vel = 0;
-                    if(weapon.CompareTag("BulletGun"))
-                        StartCoroutine(weapon.GetComponent<BulletGun>().attack());
-                    else if(weapon.CompareTag("Melee"))
-                        weapon.GetComponent<Melee>().attack();
-                } else {
-                    vel = characterSpeed * 1.5f;
-                }
                 lastAttackingTime = Time.time;
 
             } else if(Time.time - lastAttackingTime >= 0.5f) {
+                transform.Find("AttackSign").gameObject.SetActive(false);
                 isAttacking = false;
+            }
+
+            if(isAttacking) {
+                if(player.position.x >= transform.position.x)
+                    transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
+                else
+                    transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
+
+                if(!frontRay) {
+                    vel = 0;
+                } else if(frontRay.distance < attackPointDist) {
+                    vel = characterSpeed * -1.5f;
+                } else if(frontRay.distance < attackPointDist + weaponRange) {
+                    vel = 0;
+                    if(weapon.CompareTag("BulletGun")) {
+                        yield return new WaitForSeconds(0.25f);
+                        StartCoroutine(weapon.GetComponent<BulletGun>().attack());
+                    }
+                    else if(weapon.CompareTag("Melee")) {
+                        yield return new WaitForSeconds(0.25f);
+                        weapon.GetComponent<Melee>().attack();
+                    }
+                } else {
+                    vel = characterSpeed * 1.5f;
+                }
             }
 
             yield return null;
         }
     }
-    private RaycastHit2D backRay;
-    // private IEnumerator shootRays() {
-    //     while(true) {
-    //         frontRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.right), visualRange, ~1 << LayerMask.NameToLayer("Enemy"));
-    //         backRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.left), 2, ~1 << LayerMask.NameToLayer("Enemy"));
-
-    //         if(frontRay && frontRay.collider.CompareTag("Player"))
-    //             isAttacking = true;
-    //         else
-    //             isAttacking = false;
-            
-    //         if(backRay && backRay.collider.CompareTag("Player"))
-    //             onAlert = true;
-    //         else
-    //             onAlert = false;
-            
-    //         yield return null;
-    //     }
-    // }
-
-    // private IEnumerator waitAndGoLeft(float time, float speed) {
-    //     vel = 0;
-    //     yield return new WaitForSeconds(time);
-    //     transform.localScale = new Vector2(-Mathf.Abs(transform.localScale.x), transform.localScale.y);
-    //     vel = speed;
-    // }
-    // private IEnumerator waitAndGoRight(float time, float speed) {
-    //     vel = 0;
-    //     yield return new WaitForSeconds(time);
-    //     transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x), transform.localScale.y);
-    //     vel = speed;
-    // }
-
-    // private IEnumerator waitAndTurn() {
-    //     while(true) {
-    //         float pos = transform.position.x;
-            
-    //         turnRight = false; turnLeft = false;
-    //         if(!isAttacking && pos <= leftPoint && transform.localScale.x < 0) {
-    //             vel = 0;
-    //             yield return new WaitForSeconds(1f);
-    //             turnRight = true;
-    //         } else if(!isAttacking && pos >= rightPoint && transform.localScale.x > 0) {
-    //             vel = 0;
-    //             yield return new WaitForSeconds(1f);
-    //             turnLeft = true;
-    //         } else
-    //             vel = characterSpeed;
-
-    //         yield return null;
-    //     }
-    // }
-
-    // private void OnTriggerEnter2D(Collider2D other) {
-    //     Debug.Log(other.tag);
-    //     if(other.CompareTag("Player")) {
-    //         Debug.Log("player enter");
-    //         onAlert = true;
-    //     }
-    // }
-
-    // private void OnTriggerExit2D(Collider2D other) {
-    //     if(other.CompareTag("Player")) {
-    //         onAlert = false;
-    //     }
-    // }
 }
-

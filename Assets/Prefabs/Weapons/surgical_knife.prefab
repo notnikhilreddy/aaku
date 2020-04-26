@@ -25,14 +25,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 1.1058723, y: 0.55490375}
-      - {x: 0.6777564, y: 0.36054233}
-      - {x: 0.73765516, y: 0.2609099}
-      - {x: 0.82113284, y: 0.2612704}
-      - {x: 0.90277416, y: 0.28668806}
-      - {x: 0.9982445, y: 0.33053017}
-      - {x: 1.0675778, y: 0.38550276}
-      - {x: 1.110521, y: 0.46811146}
+    - - {x: -0.0067232847, y: 0.0025514364}
+      - {x: -0.4533769, y: -0.18788612}
+      - {x: -0.39072204, y: -0.28749704}
+      - {x: -0.31118965, y: -0.28713667}
+      - {x: -0.2137667, y: -0.2617189}
+      - {x: -0.11435115, y: -0.2139315}
+      - {x: -0.033181548, y: -0.13923198}
+      - {x: 0.0018706322, y: -0.06451416}
 --- !u!1 &3457850244479706804
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,6 +132,7 @@ MonoBehaviour:
   weaponWeight: 1
   damagePerAttack: 5
   attacking: 0
+  weaponRange: 0.8
 --- !u!95 &4343217909340567088
 Animator:
   serializedVersion: 3
@@ -161,12 +162,12 @@ PrefabInstance:
     - target: {fileID: 1584380004284947122, guid: af060d96a2cec14958fdfd077f84ca2d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.117
       objectReference: {fileID: 0}
     - target: {fileID: 1584380004284947122, guid: af060d96a2cec14958fdfd077f84ca2d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.548
       objectReference: {fileID: 0}
     - target: {fileID: 1584380004284947122, guid: af060d96a2cec14958fdfd077f84ca2d,
         type: 3}
@@ -216,7 +217,7 @@ PrefabInstance:
     - target: {fileID: 2398426544988332153, guid: af060d96a2cec14958fdfd077f84ca2d,
         type: 3}
       propertyPath: m_Name
-      value: Edge
+      value: AttackPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6263937080491998554, guid: af060d96a2cec14958fdfd077f84ca2d,
         type: 3}

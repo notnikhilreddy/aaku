@@ -22,11 +22,13 @@ public class EdgeController : MonoBehaviour {
         if(attackedBy.Equals("Player") && !otherTag.Equals("Player")) {
             if(otherTag.Equals("Enemy")) {
                 other.GetComponent<EnemyHealth>().addDamage(damage);
+                gameObject.SetActive(false);
             }
         }
         if(attackedBy.Equals("Enemy") && !otherTag.Equals("Enemy")) {
             if(otherTag.Equals("Player")) {
                 other.GetComponent<PlayerHealth>().addDamage(damage);
+                gameObject.SetActive(false);
             }
         }
     }

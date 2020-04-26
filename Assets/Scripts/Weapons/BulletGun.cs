@@ -13,7 +13,8 @@ public class BulletGun : MonoBehaviour {
     public float damagePerBullet = 1f;
     public float spreadAngle = 10f;
     public float horizontalSpread = 0f;
-    public float bulletRange = 100f;
+    [HideInInspector] public float weaponRange = 100f;
+    public float gunRange = 100f;
 
     public Animator animator;
     
@@ -23,6 +24,7 @@ public class BulletGun : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        weaponRange = gunRange;
         attackPoint = transform.Find("AttackPoint");
 
         owner = transform.parent.parent.gameObject;
@@ -45,7 +47,7 @@ public class BulletGun : MonoBehaviour {
             newBullet.GetComponent<BulletController>().shotBy = owner.tag;
             newBullet.GetComponent<BulletController>().damage = damagePerBullet;
             newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
-            newBullet.GetComponent<BulletController>().life = bulletRange / bulletSpeed;
+            newBullet.GetComponent<BulletController>().life = weaponRange / bulletSpeed;
 
             // animator.SetBool("Attacking", false);
 
@@ -64,7 +66,7 @@ public class BulletGun : MonoBehaviour {
                 newBullet.GetComponent<BulletController>().shotBy = owner.tag;
                 newBullet.GetComponent<BulletController>().damage = damagePerBullet;
                 newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Quaternion.Euler(0, 0, offsetAngle) * Vector2.right * (bulletSpeed+offsetV));
-                newBullet.GetComponent<BulletController>().life = bulletRange / (bulletSpeed+offsetV);
+                newBullet.GetComponent<BulletController>().life = weaponRange / (bulletSpeed+offsetV);
 
                 // animator.SetBool("Attacking", false);
 
