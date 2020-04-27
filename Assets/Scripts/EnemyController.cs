@@ -39,6 +39,9 @@ public class EnemyController : MonoBehaviour {
             // Debug.Log(weaponRange);
             characterSpeed /= weapon.GetComponent<Melee>().weaponWeight;
         }
+
+        transform.Find("AlertSign").gameObject.SetActive(false);
+        transform.Find("AttackSign").gameObject.SetActive(false);
         // Debug.Log(attackPointDist);
         // Debug.Log(weaponRange);
 
@@ -138,6 +141,7 @@ public class EnemyController : MonoBehaviour {
             
             if(frontRay && frontRay.collider.CompareTag("Player")) {
                 isAttacking = true;
+                transform.Find("AlertSign").gameObject.SetActive(false);
                 transform.Find("AttackSign").gameObject.SetActive(true);
                 player = frontRay.transform;
                 

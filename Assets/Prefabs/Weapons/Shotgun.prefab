@@ -105,7 +105,8 @@ MonoBehaviour:
   damagePerBullet: 1
   spreadAngle: 10
   horizontalSpread: 5
-  bulletRange: 5
+  weaponRange: 100
+  gunRange: 5
   animator: {fileID: 0}
 --- !u!95 &-7943063634063694653
 Animator:

@@ -21,6 +21,7 @@ public class BulletGun : MonoBehaviour {
     private Transform attackPoint;
     private float lastFireTime = 0f;
     private GameObject owner;
+    private Rigidbody2D ownerRB;
 
     // Start is called before the first frame update
     void Start() {
@@ -28,6 +29,7 @@ public class BulletGun : MonoBehaviour {
         attackPoint = transform.Find("AttackPoint");
 
         owner = transform.parent.parent.gameObject;
+        ownerRB = owner.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -46,7 +48,7 @@ public class BulletGun : MonoBehaviour {
             GameObject newBullet = Instantiate(bullet, attackPoint.position, Quaternion.identity);
             newBullet.GetComponent<BulletController>().shotBy = owner.tag;
             newBullet.GetComponent<BulletController>().damage = damagePerBullet;
-            newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * bulletSpeed);
+            newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Vector2.right * (bulletSpeed + Mathf.Abs(ownerRB.velocity.x)));
             newBullet.GetComponent<BulletController>().life = weaponRange / bulletSpeed;
 
             // animator.SetBool("Attacking", false);
@@ -65,7 +67,7 @@ public class BulletGun : MonoBehaviour {
                 newBullet = Instantiate(bullet, attackPoint.position, transform.rotation);
                 newBullet.GetComponent<BulletController>().shotBy = owner.tag;
                 newBullet.GetComponent<BulletController>().damage = damagePerBullet;
-                newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Quaternion.Euler(0, 0, offsetAngle) * Vector2.right * (bulletSpeed+offsetV));
+                newBullet.GetComponent<Rigidbody2D>().velocity = transform.TransformDirection(Quaternion.Euler(0, 0, offsetAngle) * Vector2.right * (bulletSpeed + Mathf.Abs(ownerRB.velocity.x) + offsetV));
                 newBullet.GetComponent<BulletController>().life = weaponRange / (bulletSpeed+offsetV);
 
                 // animator.SetBool("Attacking", false);
