@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 playerScale;
     // public float speedScale = 1f;
     private float direction;
-    private GameObject weapon;
+    public GameObject weapon;
     // private bool goLeft, goRight, jump;
     
 
@@ -21,11 +21,11 @@ public class PlayerController : MonoBehaviour {
         platformLayer = LayerMask.NameToLayer("Platform");
         playerScale = transform.localScale;
 
-        weapon = transform.Find("Hand").GetChild(0).gameObject;
-        if(weapon.tag.Equals("BulletGun"))
-            characterSpeed /= weapon.GetComponent<BulletGun>().weaponWeight;
-        else if(weapon.tag.Equals("Melee"))
-            characterSpeed /= weapon.GetComponent<Melee>().weaponWeight;
+        // weapon = transform.Find("Hand").GetChild(0).gameObject;
+        // if(weapon.tag.Equals("BulletGun"))
+        //     characterSpeed /= weapon.GetComponent<BulletGun>().weaponWeight;
+        // else if(weapon.tag.Equals("Melee"))
+        //     characterSpeed /= weapon.GetComponent<Melee>().weaponWeight;
     }
 
 
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
             if(weapon.tag.Equals("BulletGun"))
                 StartCoroutine(weapon.GetComponent<BulletGun>().attack());
             else if(weapon.tag.Equals("Melee"))
-                weapon.GetComponent<Melee>().attack();
+                StartCoroutine(weapon.GetComponent<Melee>().attack());
         }
     }
 

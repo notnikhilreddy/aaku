@@ -28,15 +28,18 @@ public class Melee : MonoBehaviour {
     }
 
     private void Update() {
-        if(!attacking)
-            edge.SetActive(false);
+        // if(!attacking) {
+        //     edge.SetActive(false);
+        // }
     }
 
-    public void attack() {
+    public IEnumerator attack() {
         if(!attacking) {
             attacking = true;
             edge.SetActive(true);
             animator.SetTrigger("Attack");
+            while(attacking) yield return null;
+            edge.SetActive(false);
         }
     }
 }

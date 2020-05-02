@@ -5,14 +5,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float fullHealth;
+    public float fullHealth = 50f;
     public Slider healthSlider;
     private float currentHealth;
     // Start is called before the first frame update
 
-    public PlayerHealth() {
-        this.fullHealth = 50f;
-    }
+
     void Start()
     {
         currentHealth = fullHealth;

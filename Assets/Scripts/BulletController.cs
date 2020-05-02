@@ -23,18 +23,17 @@ public class BulletController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         string otherTag = other.gameObject.tag;
-        if(shotBy.Equals("Player") && !otherTag.Equals("Player")) {
-            if(otherTag.Equals("Enemy")) {
+        if(shotBy.Equals("Player") && otherTag.Equals("Enemy")) {
+            // if(otherTag.Equals("Enemy")) {
                 other.GetComponent<EnemyHealth>().addDamage(damage);
-            }
-            Destroy(gameObject);
+            // }
         }
-        if(shotBy.Equals("Enemy") && !otherTag.Equals("Enemy")) {
-            if(otherTag.Equals("Player")) {
+        if(shotBy.Equals("Enemy") && otherTag.Equals("Player")) {
+            // if(otherTag.Equals("Player")) {
                 other.GetComponent<PlayerHealth>().addDamage(damage);
-            }
-            Destroy(gameObject);
+            // }
         }
+        Destroy(gameObject);
     }
 
     private void OnBecameInvisible() {

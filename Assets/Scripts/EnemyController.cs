@@ -170,7 +170,7 @@ public class EnemyController : MonoBehaviour {
                     }
                     else if(weapon.CompareTag("Melee")) {
                         yield return new WaitForSeconds(0.25f);
-                        weapon.GetComponent<Melee>().attack();
+                        StartCoroutine(weapon.GetComponent<Melee>().attack());
                     }
                 } else {
                     vel = characterSpeed * 1.5f;
