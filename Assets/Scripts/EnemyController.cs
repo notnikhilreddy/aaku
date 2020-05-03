@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour {
         RaycastHit2D backRay;
         while(true) {
             if(!isAttacking) {
-                backRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.left), 3, ~1 << LayerMask.NameToLayer("Enemy"));
+                backRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.left), 3, ~(1<<10 | 1<<11 | 1<<16));
                 
                 if(backRay && backRay.collider.CompareTag("Player")) {
                     onAlert = true;
@@ -137,7 +137,7 @@ public class EnemyController : MonoBehaviour {
         Transform player = null;
 
         while(true) {
-            frontRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.right), visualRange, ~1 << LayerMask.NameToLayer("Enemy"));
+            frontRay = Physics2D.Raycast(eye.position, eye.TransformDirection(Vector3.right), visualRange, ~(1<<10 | 1<<11 | 1<<16)); //~1 << LayerMask.NameToLayer("Enemy"));
             
             if(frontRay && frontRay.collider.CompareTag("Player")) {
                 isAttacking = true;
